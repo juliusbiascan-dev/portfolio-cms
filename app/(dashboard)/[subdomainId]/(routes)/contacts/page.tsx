@@ -4,13 +4,11 @@ import { ContactForm } from "@/features/contact/contact-form";
 import { db } from "@/lib/db";
 import { redirect } from "next/navigation";
 
-type Props = {
+export default async function ContactPage({
+  params,
+}: {
   params: { subdomainId: string };
-};
-
-const ContactPage = async ({
-  params
-}: Props) => {
+}) {
   const session = await auth();
 
   if (!session) redirect("/auth/login");
@@ -48,5 +46,3 @@ const ContactPage = async ({
     </PageContainer>
   );
 }
-
-export default ContactPage;

@@ -4,14 +4,13 @@ import { ContactForm } from "@/features/contact/contact-form";
 import { db } from "@/lib/db";
 import { redirect } from "next/navigation";
 
-interface ContactPageProps {
-  params: { subdomainId: string }
-  searchParams: { [key: string]: string | string[] | undefined }
-}
+type Props = {
+  params: { subdomainId: string };
+};
 
 const ContactPage = async ({
   params
-}: ContactPageProps) => {
+}: Props) => {
   const session = await auth();
 
   if (!session) redirect("/auth/login");

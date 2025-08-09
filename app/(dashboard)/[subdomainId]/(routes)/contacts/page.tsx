@@ -1,16 +1,17 @@
 import { auth } from "@/auth";
 import PageContainer from "@/components/layout/page-container";
 import { ContactForm } from "@/features/contact/contact-form";
-import { contactFormSchema } from "@/features/contact/schema";
 import { db } from "@/lib/db";
 import { redirect } from "next/navigation";
-import z from "zod";
+
+interface ContactPageProps {
+  params: { subdomainId: string }
+  searchParams: { [key: string]: string | string[] | undefined }
+}
 
 const ContactPage = async ({
   params
-}: {
-  params: { subdomainId: string }
-}) => {
+}: ContactPageProps) => {
   const session = await auth();
 
   if (!session) redirect("/auth/login");

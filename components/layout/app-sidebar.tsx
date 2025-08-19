@@ -60,10 +60,12 @@ import { Button } from '../ui/button';
 
 import { NavItem } from '@/types';
 
+interface Subdomain {
+  id: string;
+  name: string;
+}
 
-
-
-export default function AppSidebar({ subdomains = [] }: { subdomains: Record<string, any>[] }) {
+export default function AppSidebar({ subdomains = [] }: { subdomains: Subdomain[] }) {
   const { data: session } = useSession()
 
   const user = session?.user || null;

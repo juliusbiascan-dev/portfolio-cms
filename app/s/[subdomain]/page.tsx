@@ -223,7 +223,7 @@ export default async function SubdomainPage({
 
             <BlurFade delay={BLUR_FADE_DELAY * 8}>
               <div className="flex flex-wrap justify-center gap-3">
-                {profile.skills.map((skill, id) => (
+                {profile.skills.map((skill) => (
                   <Badge
                     key={skill}
                     className="px-4 py-2 text-sm font-medium bg-white/80 backdrop-blur-sm border border-gray-200 hover:bg-white hover:shadow-md transition-all duration-200 hover:scale-105"
@@ -248,10 +248,10 @@ export default async function SubdomainPage({
             </BlurFade>
 
             <div className="space-y-6">
-              {profile.works.map((work, id) => (
+              {profile.works.map((work) => (
                 <BlurFade
                   key={work.company}
-                  delay={BLUR_FADE_DELAY * 10 + id * 0.1}
+                  delay={BLUR_FADE_DELAY * 10 + 0.1}
                 >
                   <ResumeCard
                     logoUrl={work.logoUrl || ''}
@@ -280,10 +280,10 @@ export default async function SubdomainPage({
             </BlurFade>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {profile.projects.map((project, id) => (
+              {profile.projects.map((project) => (
                 <BlurFade
                   key={project.title}
-                  delay={BLUR_FADE_DELAY * 12 + id * 0.1}
+                  delay={BLUR_FADE_DELAY * 12 + 0.1}
                 >
                   <ProjectCard
                     href={project.href}
@@ -323,8 +323,8 @@ export default async function SubdomainPage({
               <Card className="p-8 bg-white/50 backdrop-blur-sm border-0 shadow-lg">
                 <CardContent className="p-0 text-center">
                   <p className="text-lg text-gray-700 mb-6">
-                    I'm always interested in new opportunities and collaborations.
-                    Feel free to reach out if you'd like to work together!
+                    I&apos;m always interested in new opportunities and collaborations.
+                    Feel free to reach out if you&apos;d like to work together!
                   </p>
 
                   <div className="flex flex-wrap justify-center gap-4">

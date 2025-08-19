@@ -17,12 +17,16 @@ import {
 import { useSubdomainModal } from '@/hooks/use-subdomain-modal';
 import { useParams } from 'next/navigation';
 
+interface Tenant {
+  id: string;
+  name: string;
+}
 
 export function OrgSwitcher({
   tenants,
   onTenantSwitch
 }: {
-  tenants: Record<string, any>[];
+  tenants: Tenant[];
   onTenantSwitch?: (tenantId: string) => void;
 }) {
 
@@ -45,7 +49,7 @@ export function OrgSwitcher({
 
   const currentSubdomain = formattedItems.find((item) => item.value === subdomainId);
 
-  const handleTenantSwitch = (tenant: Record<string, any>) => {
+  const handleTenantSwitch = (tenant: Tenant) => {
 
     if (onTenantSwitch) {
       onTenantSwitch(tenant.id);

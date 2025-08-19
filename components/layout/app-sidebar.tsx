@@ -62,7 +62,11 @@ import { NavItem } from '@/types';
 
 interface Subdomain {
   id: string;
-  name: string;
+  name: string | null;
+  userId: string | null;
+  profileId: string | null;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export default function AppSidebar({ subdomains = [] }: { subdomains: Subdomain[] }) {

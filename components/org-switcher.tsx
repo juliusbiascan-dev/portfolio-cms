@@ -19,7 +19,7 @@ import { useParams } from 'next/navigation';
 
 interface Tenant {
   id: string;
-  name: string;
+  name: string | null;
 }
 
 export function OrgSwitcher({
@@ -43,7 +43,7 @@ export function OrgSwitcher({
   }, [params]);
 
   const formattedItems = tenants.map((item) => ({
-    label: item.name,
+    label: item.name || 'No Name',
     value: item.id
   }));
 
@@ -89,7 +89,7 @@ export function OrgSwitcher({
                 key={tenant.id}
                 onSelect={() => handleTenantSwitch(tenant)}
               >
-                {tenant.name}{' '}
+                {tenant.name || 'No Name'}{' '}
                 {tenant.id === currentSubdomain.value && (
                   <Check className='ml-auto' />
                 )}

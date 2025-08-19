@@ -7,14 +7,16 @@ import { redirect } from "next/navigation";
 const WorkPage = async ({
   params
 }: {
-  params: { subdomainId: string }
+  params: Promise<{ subdomainId: string }>
 }) => {
+  const { subdomainId } = await params;
+
   const session = await auth();
 
   if (!session) redirect("/auth/login");
 
   const subdomain = await db.subdomain.findFirst({
-    where: { id: params.subdomainId, userId: session.user.id },
+    where: { id: subdomainId, userId: session.user.id },
     include: {
       profile: {
         include: {

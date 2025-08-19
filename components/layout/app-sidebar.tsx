@@ -71,6 +71,16 @@ export default function AppSidebar({ subdomains = [] }: { subdomains: Record<str
   const { isOpen } = useMediaQuery();
   const params = useParams();
   const router = useRouter();
+  const [subdomainId, setSubdomainId] = React.useState<string | null>(null);
+
+  React.useEffect(() => {
+    const getParams = async () => {
+      const resolvedParams = await params;
+      setSubdomainId(resolvedParams.subdomainId as string);
+    };
+    getParams();
+  }, [params]);
+
   const handleSwitchTenant = (_tenantId: string) => {
     const currentPath = window.location.pathname;
     const newPath = currentPath.replace(/^\/[^\/]+/, `/${_tenantId}`);
@@ -86,7 +96,7 @@ export default function AppSidebar({ subdomains = [] }: { subdomains: Record<str
   const navItems: NavItem[] = [
     {
       title: 'Dashboard',
-      url: `/${params.subdomainId}/overview`,
+      url: `/${subdomainId}/overview`,
       icon: 'dashboard',
       isActive: false,
       shortcut: ['d', 'd'],
@@ -94,7 +104,7 @@ export default function AppSidebar({ subdomains = [] }: { subdomains: Record<str
     },
     {
       title: 'Profile',
-      url: `/${params.subdomainId}/profile`,
+      url: `/${subdomainId}/profile`,
       icon: 'userPen',
       shortcut: ['p', 'p'],
       isActive: false,
@@ -102,7 +112,7 @@ export default function AppSidebar({ subdomains = [] }: { subdomains: Record<str
     },
     {
       title: 'Work Experience',
-      url: `/${params.subdomainId}/work`,
+      url: `/${subdomainId}/work`,
       icon: 'briefcase',
       shortcut: ['w', 'e'],
       isActive: false,
@@ -110,7 +120,7 @@ export default function AppSidebar({ subdomains = [] }: { subdomains: Record<str
     },
     {
       title: 'Projects',
-      url: `/${params.subdomainId}/projects`,
+      url: `/${subdomainId}/projects`,
       icon: 'projects',
       shortcut: ['p', 'p'],
       isActive: false,
@@ -118,7 +128,7 @@ export default function AppSidebar({ subdomains = [] }: { subdomains: Record<str
     },
     {
       title: 'Contacts',
-      url: `/${params.subdomainId}/contacts`,
+      url: `/${subdomainId}/contacts`,
       icon: 'contact',
       shortcut: ['k', 'k'],
       isActive: false,
@@ -237,7 +247,7 @@ export default function AppSidebar({ subdomains = [] }: { subdomains: Record<str
 
                 <DropdownMenuGroup>
                   <DropdownMenuItem
-                    onClick={() => router.push(`/${params.subdomainId}/profile`)}
+                    onClick={() => router.push(`/${subdomainId}/profile`)}
                   >
                     <IconUserCircle className='mr-2 h-4 w-4' />
                     Profile

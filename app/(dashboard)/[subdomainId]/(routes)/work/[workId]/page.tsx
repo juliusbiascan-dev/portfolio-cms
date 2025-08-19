@@ -7,14 +7,16 @@ import { redirect } from "next/navigation";
 const WorkPage = async ({
   params
 }: {
-  params: { subdomainId: string; workId: string }
+  params: Promise<{ subdomainId: string; workId: string }>
 }) => {
+  const { subdomainId, workId } = await params;
+
   const session = await auth();
 
   if (!session) redirect("/auth/login");
 
   const subdomain = await db.subdomain.findFirst({
-    where: { id: params.subdomainId, userId: session.user.id },
+    where: { id: subdomainId, userId: session.user.id },
     include: {
       profile: {
         include: {
@@ -33,16 +35,16 @@ const WorkPage = async ({
   let mode: "create" | "edit" = "create";
 
   // Handle both "new" and existing work ids
-  if (params.workId !== 'new') {
+  if (workId !== 'new') {
     work = await db.work.findFirst({
       where: {
-        id: params.workId,
+        id: workId,
         profileId: subdomain.profile?.id
       }
     });
 
     if (!work) {
-      return redirect(`/${params.subdomainId}/work`);
+      return redirect(`/${subdomainId}/work`);
     }
 
     pageTitle = "Edit Work Experience";

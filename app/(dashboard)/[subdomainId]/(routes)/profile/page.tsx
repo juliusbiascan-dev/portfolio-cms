@@ -9,8 +9,9 @@ import z from "zod";
 const ProfilePage = async ({
   params
 }: {
-  params: { subdomainId: string }
+  params: Promise<{ subdomainId: string }>
 }) => {
+  const { subdomainId } = await params;
 
   const session = await auth();
 
@@ -18,7 +19,7 @@ const ProfilePage = async ({
 
 
   const subdomain = await db.subdomain.findFirst({
-    where: { id: params.subdomainId, userId: session.user.id },
+    where: { id: subdomainId, userId: session.user.id },
     include: {
       profile: true
     }

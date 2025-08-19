@@ -7,14 +7,16 @@ import { redirect } from "next/navigation";
 const ProjectPage = async ({
   params
 }: {
-  params: { subdomainId: string; projectId: string }
+  params: Promise<{ subdomainId: string; projectId: string }>
 }) => {
+  const { subdomainId, projectId } = await params;
+
   const session = await auth();
 
   if (!session) redirect("/auth/login");
 
   const subdomain = await db.subdomain.findFirst({
-    where: { id: params.subdomainId, userId: session.user.id },
+    where: { id: subdomainId, userId: session.user.id },
     include: {
       profile: {
         include: {
@@ -37,10 +39,10 @@ const ProjectPage = async ({
   let mode: "create" | "edit" = "create";
 
   // Handle both "new" and existing project ids
-  if (params.projectId !== 'new') {
+  if (projectId !== 'new') {
     project = await db.project.findFirst({
       where: {
-        id: params.projectId,
+        id: projectId,
         profileId: subdomain.profile?.id
       },
       include: {
@@ -49,7 +51,7 @@ const ProjectPage = async ({
     });
 
     if (!project) {
-      return redirect(`/${params.subdomainId}/projects`);
+      return redirect(`/${subdomainId}/projects`);
     }
 
     pageTitle = "Edit Project";

@@ -28,13 +28,22 @@ export function OrgSwitcher({
 
   const subdomainModal = useSubdomainModal();
   const params = useParams();
+  const [subdomainId, setSubdomainId] = React.useState<string | null>(null);
+
+  React.useEffect(() => {
+    const getParams = async () => {
+      const resolvedParams = await params;
+      setSubdomainId(resolvedParams.subdomainId as string);
+    };
+    getParams();
+  }, [params]);
 
   const formattedItems = tenants.map((item) => ({
     label: item.name,
     value: item.id
   }));
 
-  const currentSubdomain = formattedItems.find((item) => item.value === params.subdomainId);
+  const currentSubdomain = formattedItems.find((item) => item.value === subdomainId);
 
   const handleTenantSwitch = (tenant: Record<string, any>) => {
 

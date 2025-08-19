@@ -2,9 +2,10 @@ import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import { db } from "@/lib/db";
 
-interface DashboardPageProps { params: { subdomainId: string; }; }
+interface DashboardPageProps { params: Promise<{ subdomainId: string; }>; }
 
 const DashboardPage: React.FC<DashboardPageProps> = async ({ params }) => {
+  const { subdomainId } = await params;
 
   const session = await auth();
 
@@ -21,7 +22,7 @@ const DashboardPage: React.FC<DashboardPageProps> = async ({ params }) => {
   }
 
   else {
-    redirect(`${params.subdomainId}/overview`);
+    redirect(`${subdomainId}/overview`);
   }
 }
 

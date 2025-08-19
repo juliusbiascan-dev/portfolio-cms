@@ -1,7 +1,7 @@
 "use client";
 
 import { notFound } from 'next/navigation';
-import { WorkForm } from './work-form';
+import { WorkForm } from '@/features/work/work-form';
 import { Work } from '@/lib/generated/prisma';
 
 type WorkViewPageProps = {
@@ -36,7 +36,7 @@ export default function WorkViewPage({
         profileId={profileId}
         works={works}
         mode={workId === 'new' ? 'create' : 'edit'}
-        initialData={work}
+        initialData={work || undefined}
       />
     </div>
   );

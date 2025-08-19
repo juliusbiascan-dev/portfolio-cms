@@ -38,10 +38,10 @@ interface RegisterFormProps {
   isRoot?: boolean;
 }
 
-export const RegisterForm = ({ 
-  token, 
+export const RegisterForm = ({
+  token,
   labId,
-  inviteEmail ,
+  inviteEmail,
   isRoot
 }: RegisterFormProps) => {
   const [error, setError] = useState<string | undefined>("");
@@ -63,7 +63,7 @@ export const RegisterForm = ({
     setSuccess("");
 
     startTransition(() => {
-      register(values, token, labId, isRoot)
+      register(values)
         .then((data) => {
           if (data.success && labId) {
             // Update redirection path to match new structure
@@ -81,8 +81,8 @@ export const RegisterForm = ({
       headerComponent={
         <div className="flex items-center justify-center space-x-2 flex-wrap">
           <Image
-            src="/passlogo-small.png"
-            alt="PASS Logo"
+            src="/profile.jpg"
+            alt="Logo"
             width={40}
             height={40}
             className="rounded-full border-2 border-[#C9121F] sm:w-12 sm:h-12"

@@ -2,29 +2,38 @@ import * as React from "react"
 
 import { Input } from "./input";
 import { EyeIcon, EyeOff } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export interface PasswordInputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {
-  suffix?: React.ReactNode;
-}
+  extends React.InputHTMLAttributes<HTMLInputElement> { }
 
 const PasswordInput = React.forwardRef<HTMLInputElement, PasswordInputProps>(
-  ({ suffix, className, ...props }, ref) => {
+  ({ className, ...props }, ref) => {
 
     const [showPassword, setShowPassword] = React.useState(false);
 
     return (
-      <Input
-        type={showPassword ? "text" : "password"}
-        suffix={
-          <div className="cursor-pointer">
+      <div className="relative">
+        <Input
+          type={showPassword ? "text" : "password"}
+          className={cn("pr-10", className)}
+          {...props}
+          ref={ref}
+        />
+        <div className="absolute inset-y-0 right-0 flex items-center pr-3">
+          <button
+            type="button"
+            className="cursor-pointer"
+            onClick={() => setShowPassword(!showPassword)}
+          >
             {showPassword ? (
-              <EyeIcon className="h-4 w-4" onClick={() => setShowPassword(false)} />
+              <EyeOff className="h-4 w-4 text-gray-500" />
             ) : (
-              <EyeOff className="h-4 w-4" onClick={() => setShowPassword(true)} />
+              <EyeIcon className="h-4 w-4 text-gray-500" />
             )}
-          </div>
-        } className={className} {...props} ref={ref}></Input>
+          </button>
+        </div>
+      </div>
     )
   }
 )

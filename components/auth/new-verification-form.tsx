@@ -1,13 +1,13 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { BeatLoader } from "react-spinners";
 import { useSearchParams } from "next/navigation";
 
 import { newVerification } from "@/actions/new-verification";
 import { CardWrapper } from "@/components/auth/card-wrapper";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
+import { Icons } from "@/components/icons";
 
 import Image from "next/image";
 export const NewVerificationForm = () => {
@@ -46,8 +46,8 @@ export const NewVerificationForm = () => {
       headerComponent={
         <div className="flex items-center justify-center space-x-3">
           <Image
-            src="/passlogo-small.png"
-            alt="SMNHS Logo"
+            src="/profile.jpg"
+            alt="Logo"
             width={48}
             height={48}
             className="rounded-full border-2 border-[#C9121F] shadow-lg"
@@ -62,7 +62,7 @@ export const NewVerificationForm = () => {
     >
       <div className="flex items-center w-full justify-center">
         {!success && !error && (
-          <BeatLoader color="#C9121F" />
+          <Icons.spinner className="h-6 w-6 animate-spin text-[#C9121F]" />
         )}
         <FormSuccess message={success} />
         {!success && (

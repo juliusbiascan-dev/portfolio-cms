@@ -59,8 +59,8 @@ export const NewPasswordForm = () => {
       headerComponent={
         <div className="flex items-center justify-center space-x-3">
           <Image
-            src="/passlogo-small.png"
-            alt="SMNHS Logo"
+            src="/profile.jpg"
+            alt="Logo"
             width={48}
             height={48}
             className="rounded-full border-2 border-[#C9121F] shadow-lg"

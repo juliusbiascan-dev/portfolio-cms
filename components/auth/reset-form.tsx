@@ -55,8 +55,8 @@ export const ResetForm = () => {
       headerComponent={
         <div className="flex items-center justify-center space-x-2 flex-wrap">
           <Image
-            src="/passlogo-small.png"
-            alt="SMNHS Logo"
+            src="/profile.jpg"
+            alt="Logo"
             width={40}
             height={40}
             className="rounded-full border-2 border-[#C9121F] sm:w-12 sm:h-12"

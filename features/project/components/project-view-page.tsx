@@ -1,7 +1,7 @@
 "use client";
 
 import { notFound } from 'next/navigation';
-import { ProjectForm } from '../../project-form';
+import { ProjectForm } from '@/features/project/project-form';
 import { Project, Link } from '@/lib/generated/prisma';
 
 type ProjectViewPageProps = {
@@ -36,7 +36,7 @@ export default function ProjectViewPage({
         profileId={profileId}
         projects={projects}
         mode={projectId === 'new' ? 'create' : 'edit'}
-        initialData={project}
+        initialData={project || undefined}
       />
     </div>
   );
